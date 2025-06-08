@@ -1,27 +1,35 @@
 public class PracticeProblem {
+  
+    static int[] arr;
+    static boolean[] insequence = new boolean[1000000];
 
-	public static void main(String args[]) {
+    static int recamanNum(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        
+        int p = recamanNum(n - 1);
+        if (p - n > 0 && !insequence[p - n]) {
+            arr[n - 1] = p - n;
+            insequence[p - n] = true;
+            return p - n;
+        } else {
+            
+            insequence[p + n] = true;
+            arr[n - 1] = p + n;
+            return p + n;
+        }
+    }
 
-	}
+    static int[] recaman(int n) {
+        if (n < 0) {
+            return new int[0];
+        }
 
-	public static void q1() {
-		//Write question 1 code here
-	}
-
-	public static void q2() {
-		//Write question 2 code here
-	}
-
-	public static void q3() {
-		//Write question 3 code here
-	}
-
-	public static void q4() {
-		//Write question 4 code here
-	}
-
-	public static void q5() {
-		//Write question 5 code here
-	}
-
+        arr = new int[n];
+        
+        recamanNum(n);
+        insequence = new boolean[99999999];
+        return arr;
+    }
 }
